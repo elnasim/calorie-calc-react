@@ -4,6 +4,7 @@ export default function AddRation() {
   return (
     <div className="add-ration">
       <div className="container">
+        <div className="title">Добавить рацион</div>
         <form className="add-ration-form">
           <select className="input">
             <option value="Огурец">Огурец</option>
