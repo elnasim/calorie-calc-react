@@ -1,16 +1,75 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Product from "../components/main-page/Product";
 
 export default function Main() {
   const [ration, setRation] = useState(null);
+  const [summary, setSummary] = useState({
+    proteins: 0,
+    calories: 0,
+    carbohydrates: 0,
+    fats: 0,
+  });
 
   useEffect(() => {
-    console.log(123);
-    const rations = localStorage.getItem("ration");
-    if (ration) {
-      setRation(rations);
-    }
+    const rations = JSON.parse(localStorage.getItem("ration"));
+    setRation(rations);
   }, []);
+
+  useEffect(() => {
+    if (ration) {
+      rationInfoCalc();
+    }
+  }, [ration]);
+
+  function rationInfoCalc() {
+    let proteins = 0,
+      carbohydrates = 0,
+      calories = 0,
+      fats = 0;
+    for (let item of ration) {
+      proteins += +item.proteins;
+      calories += +item.calories;
+      carbohydrates += +item.carbohydrates;
+      fats += +item.fats;
+    }
+
+    const data = {
+      proteins,
+      calories,
+      carbohydrates,
+      fats,
+    };
+
+    setSummary(data);
+  }
+
+  function removeHandler(id) {
+    const data = ration.filter((item) => {
+      return item.id !== id;
+    });
+
+    setRation(data);
+    localStorage.setItem("ration", JSON.stringify(data));
+  }
+
+  const products =
+    ration &&
+    ration.map((item) => {
+      return (
+        <Product
+          title={item.title}
+          proteins={item.proteins}
+          fats={item.fats}
+          carbohydrates={item.carbohydrates}
+          calories={item.calories}
+          id={item.id}
+          weight={item.weight}
+          remove={removeHandler}
+          key={item.id}
+        />
+      );
+    });
 
   return (
     <div className="main">
@@ -25,49 +84,25 @@ export default function Main() {
           </div>
         </div>
 
-        <div className="product-main">
-          <div className="product-main__title">Огурец</div>
-          <div className="product-main__info">
-            <div className="product-main__i">
-              100
-              <br />Б
-            </div>
-            <div className="product-main__i">
-              100
-              <br />Ж
-            </div>
-            <div className="product-main__i">
-              100
-              <br />У
-            </div>
-            <div className="product-main__i">
-              100
-              <br />
-              Ккал
-            </div>
-            <div className="remove">
-              <span className="material-icons">delete</span>
-            </div>
-          </div>
-        </div>
+        {products}
 
         <div className="product-main">
           <div className="product-main__title">Всего</div>
           <div className="product-main__info">
             <div className="product-main__i">
-              100
+              {summary.proteins}
               <br />Б
             </div>
             <div className="product-main__i">
-              100
+              {summary.fats}
               <br />Ж
             </div>
             <div className="product-main__i">
-              100
+              {summary.carbohydrates}
               <br />У
             </div>
             <div className="product-main__i">
-              100
+              {summary.calories}
               <br />
               Ккал
             </div>

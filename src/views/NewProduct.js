@@ -11,12 +11,14 @@ export default function NewProduct() {
     e.preventDefault();
     if (!title || !proteins || !fats || !carbohydrates || !calories) return;
     let products;
+    const id = Date.now();
     if (localStorage.getItem("products")) {
       products = JSON.parse(localStorage.getItem("products"));
     } else {
       products = [];
     }
     products.push({
+      id,
       title,
       proteins,
       fats,
@@ -29,7 +31,6 @@ export default function NewProduct() {
     setFats("");
     setCarbohydrates("");
     setСalories("");
-    console.log("added!");
   }
 
   return (
