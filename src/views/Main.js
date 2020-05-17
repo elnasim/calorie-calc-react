@@ -7,11 +7,11 @@ export default function Main() {
       <div className="container">
         <div className="day">
           <div className="day__change">
-            <span class="material-icons">undo</span>
+            <span className="material-icons">undo</span>
           </div>
           <div className="day__date">16.05.2020</div>
           <div className="day__change">
-            <span class="material-icons">redo</span>
+            <span className="material-icons">redo</span>
           </div>
         </div>
 
@@ -36,7 +36,7 @@ export default function Main() {
               Ккал
             </div>
             <div className="remove">
-              <span class="material-icons">delete</span>
+              <span className="material-icons">delete</span>
             </div>
           </div>
         </div>
