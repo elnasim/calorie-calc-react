@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Main() {
+  const [ration, setRation] = useState(null);
+
+  useEffect(() => {
+    console.log(123);
+    const rations = localStorage.getItem("ration");
+    if (ration) {
+      setRation(rations);
+    }
+  }, []);
+
   return (
     <div className="main">
       <div className="container">
