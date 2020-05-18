@@ -24,10 +24,10 @@ export default function NewProduct() {
     products.push({
       id,
       title,
-      proteins,
-      fats,
-      carbohydrates,
-      calories,
+      proteins: proteins.replace(/,/gi, "."),
+      fats: fats.replace(/,/gi, "."),
+      carbohydrates: carbohydrates.replace(/,/gi, "."),
+      calories: calories.replace(/,/gi, "."),
     });
 
     save("products", products);
