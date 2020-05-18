@@ -116,8 +116,8 @@ export default function Main() {
         )}
 
         {!isLoading && (
-          <Link to="/add-ration" className="button">
-            Добавить
+          <Link to="/add-ration" className="button button_mobile">
+            <span className="material-icons">add_circle</span>
           </Link>
         )}
       </div>

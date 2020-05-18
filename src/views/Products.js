@@ -48,8 +48,8 @@ export default function Products() {
       <div className="container">
         {!isLoading && prods}
         {!isLoading && (
-          <Link to="/new-product" className="button">
-            Добавить
+          <Link to="/new-product" className="button button_mobile">
+            <span className="material-icons">add_circle</span>
           </Link>
         )}
       </div>
