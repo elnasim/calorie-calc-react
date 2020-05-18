@@ -4,7 +4,7 @@ import Product from "../components/main-page/Product";
 import { read, save } from "../core/api";
 
 export default function Main() {
-  const [ration, setRation] = useState(null);
+  const [ration, setRation] = useState([]);
   const [summary, setSummary] = useState({
     proteins: 0,
     calories: 0,
@@ -78,7 +78,8 @@ export default function Main() {
   return (
     <div className="main">
       <div className="container">
-        <div className="day">
+
+        {/* <div className="day">
           <div className="day__change">
             <span className="material-icons">undo</span>
           </div>
@@ -86,7 +87,7 @@ export default function Main() {
           <div className="day__change">
             <span className="material-icons">redo</span>
           </div>
-        </div>
+        </div> */}
 
         {products}
 

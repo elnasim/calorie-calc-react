@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { read, save } from "../core/api";
 
 export default function AddRation() {
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [ration, setRation] = useState([]);
   const [product, setProduct] = useState("");
   const [weight, setWeight] = useState("");

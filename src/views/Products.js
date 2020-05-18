@@ -4,7 +4,7 @@ import { read, save } from "../core/api";
 import Product from "../components/products-page/Product";
 
 export default function Products() {
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const data = read("products");

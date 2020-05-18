@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {  HashRouter, Switch, Route } from "react-router-dom";
 import routes from "./routes";
 import Header from "./components/app/Header";
 
 export default function App() {
   return (
-    <Router>
+    <HashRouter>
       <div>
         <Header />
 
@@ -20,6 +20,6 @@ export default function App() {
           ))}
         </Switch>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
