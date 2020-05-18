@@ -5,10 +5,12 @@ import Product from "../components/products-page/Product";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const data = read("products");
     setProducts(data);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -26,30 +28,30 @@ export default function Products() {
     }
   }
 
-  const prods =
-    products &&
-    products.map((item) => {
-      return (
-        <Product
-          title={item.title}
-          proteins={item.proteins}
-          fats={item.fats}
-          carbohydrates={item.carbohydrates}
-          calories={item.calories}
-          id={item.id}
-          remove={removeHandler}
-          key={item.id}
-        />
-      );
-    });
+  const prods = products.map((item) => {
+    return (
+      <Product
+        title={item.title}
+        proteins={item.proteins}
+        fats={item.fats}
+        carbohydrates={item.carbohydrates}
+        calories={item.calories}
+        id={item.id}
+        remove={removeHandler}
+        key={item.id}
+      />
+    );
+  });
 
   return (
     <div className="products">
       <div className="container">
-        {prods}
-        <Link to="/new-product" className="button">
-          Добавить
-        </Link>
+        {!isLoading && prods}
+        {!isLoading && (
+          <Link to="/new-product" className="button">
+            Добавить
+          </Link>
+        )}
       </div>
     </div>
   );
