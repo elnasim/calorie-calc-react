@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "../components/main-page/Product";
+import { read, save } from "../core/api";
 
 export default function Main() {
   const [ration, setRation] = useState(null);
@@ -12,13 +13,14 @@ export default function Main() {
   });
 
   useEffect(() => {
-    const rations = JSON.parse(localStorage.getItem("ration"));
-    setRation(rations);
+    const data = read("ration");
+    setRation(data);
   }, []);
 
   useEffect(() => {
     if (ration) {
       rationInfoCalc();
+      save("ration", ration);
     }
   }, [ration]);
 
@@ -28,10 +30,10 @@ export default function Main() {
       calories = 0,
       fats = 0;
     for (let item of ration) {
-      proteins += +item.proteins;
-      calories += +item.calories;
-      carbohydrates += +item.carbohydrates;
-      fats += +item.fats;
+      proteins += (item.proteins * item.weight) / 100;
+      calories += (item.calories * item.weight) / 100;
+      carbohydrates += (item.carbohydrates * item.weight) / 100;
+      fats += (item.fats * item.weight) / 100;
     }
 
     const data = {
@@ -45,12 +47,14 @@ export default function Main() {
   }
 
   function removeHandler(id) {
-    const data = ration.filter((item) => {
-      return item.id !== id;
-    });
+    const res = window.confirm("Вы уверены, что хотите удалить?");
+    if (res) {
+      const data = ration.filter((item) => {
+        return item.id !== id;
+      });
 
-    setRation(data);
-    localStorage.setItem("ration", JSON.stringify(data));
+      setRation(data);
+    }
   }
 
   const products =

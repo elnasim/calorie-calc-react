@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { read, save } from "../core/api";
 
 export default function AddRation() {
   const [products, setProducts] = useState(null);
-  const [ration, setRation] = useState(null);
+  const [ration, setRation] = useState([]);
   const [product, setProduct] = useState("");
   const [weight, setWeight] = useState("");
 
   useEffect(() => {
-    const prods = JSON.parse(localStorage.getItem("products"));
-    const rations = JSON.parse(localStorage.getItem("ration"));
+    const prods = read("products");
+    const rations = read("ration");
     setProducts(prods);
     setRation(rations);
   }, []);
@@ -31,22 +32,17 @@ export default function AddRation() {
 
     if (!product || product === "Не выбрано" || !weight) return;
 
-    let ration;
-    if (localStorage.getItem("ration")) {
-      ration = JSON.parse(localStorage.getItem("ration"));
-    } else {
-      ration = [];
-    }
     const productItem = products.find((item) => item.title === product);
     const isExist = ration.find((item) => item.title === product);
+
     if (isExist) {
       isExist.weight += +weight;
-      localStorage.setItem("ration", JSON.stringify(ration));
+      save("ration", ration);
       history.push("/");
     } else {
       productItem.weight = +weight;
       ration.push(productItem);
-      localStorage.setItem("ration", JSON.stringify(ration));
+      save("ration", ration);
       history.push("/");
     }
   }

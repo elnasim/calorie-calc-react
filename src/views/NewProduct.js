@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { save, read } from "../core/api";
 
 export default function NewProduct() {
   const [title, setTitle] = useState("");
@@ -7,13 +9,15 @@ export default function NewProduct() {
   const [carbohydrates, setCarbohydrates] = useState("");
   const [calories, setСalories] = useState("");
 
+  let history = useHistory();
+
   function submitHandler(e) {
     e.preventDefault();
     if (!title || !proteins || !fats || !carbohydrates || !calories) return;
     let products;
     const id = Date.now();
-    if (localStorage.getItem("products")) {
-      products = JSON.parse(localStorage.getItem("products"));
+    if (read("products")) {
+      products = read("products");
     } else {
       products = [];
     }
@@ -25,12 +29,9 @@ export default function NewProduct() {
       carbohydrates,
       calories,
     });
-    localStorage.setItem("products", JSON.stringify(products));
-    setTitle("");
-    setProteins("");
-    setFats("");
-    setCarbohydrates("");
-    setСalories("");
+
+    save("products", products);
+    history.push("/products");
   }
 
   return (
