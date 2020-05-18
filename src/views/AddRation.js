@@ -72,7 +72,9 @@ export default function AddRation() {
               value={weight}
             />
 
-            <button className="button">Добавить</button>
+            <button className="button">
+              Добавить
+            </button>
           </form>
         )}
 
