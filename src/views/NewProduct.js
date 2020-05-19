@@ -23,11 +23,11 @@ export default function NewProduct() {
     }
     products.push({
       id,
-      title,
-      proteins: proteins.replace(/,/gi, "."),
-      fats: fats.replace(/,/gi, "."),
-      carbohydrates: carbohydrates.replace(/,/gi, "."),
-      calories: calories.replace(/,/gi, "."),
+      title: title.trim(),
+      proteins: +proteins.replace(/,/gi, "."),
+      fats: +fats.replace(/,/gi, "."),
+      carbohydrates: +carbohydrates.replace(/,/gi, "."),
+      calories: +calories.replace(/,/gi, "."),
     });
 
     save("products", products);
@@ -50,28 +50,28 @@ export default function NewProduct() {
             type="text"
             className="input"
             placeholder="Белки"
-            onChange={(e) => setProteins(e.target.value)}
+            onChange={(e) => setProteins(e.target.value.trim())}
             value={proteins}
           />
           <input
             type="text"
             className="input"
             placeholder="Жиры"
-            onChange={(e) => setFats(e.target.value)}
+            onChange={(e) => setFats(e.target.value.trim())}
             value={fats}
           />
           <input
             type="text"
             className="input"
             placeholder="Углеводы"
-            onChange={(e) => setCarbohydrates(e.target.value)}
+            onChange={(e) => setCarbohydrates(e.target.value.trim())}
             value={carbohydrates}
           />
           <input
             type="text"
             className="input"
             placeholder="Ккал"
-            onChange={(e) => setСalories(e.target.value)}
+            onChange={(e) => setСalories(e.target.value.trim())}
             value={calories}
           />
           <button type="submit" className="button" onClick={submitHandler}>

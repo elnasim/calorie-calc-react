@@ -68,7 +68,7 @@ export default function AddRation() {
               type="text"
               className="input"
               placeholder="Вес (г)"
-              onChange={(e) => setWeight(e.target.value)}
+              onChange={(e) => setWeight(e.target.value.trim())}
               value={weight}
             />
 

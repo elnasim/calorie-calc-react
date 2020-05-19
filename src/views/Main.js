@@ -32,10 +32,10 @@ export default function Main() {
       calories = 0,
       fats = 0;
     for (let item of ration) {
-      proteins += (item.proteins * item.weight) / 100;
-      calories += (item.calories * item.weight) / 100;
-      carbohydrates += (item.carbohydrates * item.weight) / 100;
-      fats += (item.fats * item.weight) / 100;
+      proteins += Math.round((item.proteins * item.weight) / 100);
+      calories += Math.round((item.calories * item.weight) / 100);
+      carbohydrates += Math.round((item.carbohydrates * item.weight) / 100);
+      fats += Math.round((item.fats * item.weight) / 100);
     }
 
     const data = {
