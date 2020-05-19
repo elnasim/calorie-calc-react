@@ -10,6 +10,7 @@ export default function AddRation() {
 
   useEffect(() => {
     const prods = read("products");
+    prods.sort((a, b) => (a.title > b.title ? 1 : -1));
     const rations = read("ration");
     setProducts(prods);
     setRation(rations);
@@ -72,9 +73,7 @@ export default function AddRation() {
               value={weight}
             />
 
-            <button className="button">
-              Добавить
-            </button>
+            <button className="button">Добавить</button>
           </form>
         )}
 
