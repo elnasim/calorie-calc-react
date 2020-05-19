@@ -9,6 +9,7 @@ export default function Products() {
 
   useEffect(() => {
     const data = read("products");
+    data.sort((a, b) => (a.title > b.title ? 1 : -1));
     setProducts(data);
     setIsLoading(false);
   }, []);
